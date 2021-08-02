@@ -1,0 +1,18 @@
+[workspace]
+
+members = [
+    # Common
+    "allocate",
+    "nome",
+    "arrow-vs-arrow2",
+    "serde"
+]
+
+[profile.release]
+debug = true
+
+[profile.bench]
+debug = true
+
+[profile.dev]
+split-debuginfo = "unpacked"
