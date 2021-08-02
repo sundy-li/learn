@@ -17,9 +17,12 @@
 
 #[macro_use]
 extern crate criterion;
+use std::sync::Arc;
+
+use arrow::compute::SortOptions;
 use criterion::Criterion;
 
-use arrow::compute::kernels::aggregate::*;
+use arrow::compute::kernels::{aggregate::*, sort};
 use arrow::util::bench_util::*;
 use arrow::{array::*, datatypes::Float32Type};
 
@@ -33,6 +36,14 @@ fn bench_min(arr_a: &Float32Array) {
 
 fn bench_max(arr_a: &Float32Array) {
     max(criterion::black_box(arr_a)).unwrap();
+}
+
+fn bench_sort_limit(arr: &ArrayRef) {
+    let opt = SortOptions {
+        descending: true,
+        nulls_first: false,
+    };
+    sort::sort_to_indices(criterion::black_box(arr), Some(opt), Some(100)).unwrap();
 }
 
 fn bench_min_string(arr_a: &StringArray) {
@@ -52,6 +63,11 @@ fn add_benchmark(c: &mut Criterion) {
         });
         c.bench_function(&format!("arrow1-max 2^{} f32", log2_size), |b| {
             b.iter(|| bench_max(&arr_a))
+        });
+
+        let arr = Arc::new(create_primitive_array::<Float32Type>(size, 0.0)) as ArrayRef;
+        c.bench_function(&format!("arrow1-sort 2^{} f32", log2_size), |b| {
+            b.iter(|| bench_sort_limit(&arr))
         });
 
         let arr_b = create_string_array::<i32>(size, 0.0);
