@@ -1,0 +1,5 @@
+argo bench -- "arrow2-min 2\^13 f32"
+arrow2-min 2^13 f32     time:   [1.5618 us 1.5680 us 1.5752 us]
+
+argo bench -- "arrow1-min 2\^13 f32"
+arrow1-min 2^13 f32     time:   [3.1624 us 3.1732 us 3.1855 us]
