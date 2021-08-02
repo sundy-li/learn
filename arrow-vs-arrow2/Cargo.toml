@@ -7,7 +7,11 @@ edition = "2018"
 
 [dependencies]
 arrow = "5.0.0"
-arrow2 = "0.2.0"
+
+arrow2 = {  git="https://github.com/datafuse-extras/arrow2", branch = "main" }
+arrow-flight = { git="https://github.com/datafuse-extras/arrow2",branch = "main" }
+
+parquet = {package = "parquet2", git = "https://github.com/datafuse-extras/parquet2", branch = "main"}
 
 [features]
 default = ["simd"]
