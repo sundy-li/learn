@@ -7,9 +7,8 @@ edition = "2018"
 
 [dependencies]
 arrow = "5.0.0"
-
-arrow2 = {  git="https://github.com/datafuse-extras/arrow2", branch = "main" }
-arrow-flight = { git="https://github.com/datafuse-extras/arrow2",branch = "main" }
+arrow2 = {  git="https://github.com/datafuse-extras/arrow2", rev = "8190d11" }
+arrow-flight = { git="https://github.com/datafuse-extras/arrow2",rev = "8190d11" }
 
 parquet = {package = "parquet2", git = "https://github.com/datafuse-extras/parquet2", branch = "main"}
 
@@ -19,12 +18,24 @@ simd = ["arrow/simd"]
 
 [dev-dependencies]
 rand = "0.8"
-criterion = "0.3"
+criterion = "0.3.5"
+pprof = { version = "0.5.0", features = ["flamegraph", "criterion"] }
+num-traits = "0.2.0"
 
 [[bench]]
 name = "aggr1"
 harness = false
 
 [[bench]]
+name = "example"
+harness = false
+
+[[bench]]
 name = "aggr2"
 harness = false
+
+[[bench]]
+name = "cast_kernels"
+harness = false
+
+
