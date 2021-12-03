@@ -5,7 +5,9 @@ members = [
     "allocate",
     "nome",
     "arrow-vs-arrow2",
-    "serde"
+    "serde",
+    "share",
+    "rust-crc32fast"
 ]
 
 [profile.release]

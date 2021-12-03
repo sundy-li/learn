@@ -52,7 +52,7 @@ fn cast_u32_u64(array: &UInt32Array) {
             .map(|c| AsPrimitive::<u64>::as_(*c));
 
         let buffer = unsafe { MutableBuffer::from_trusted_len_iter_unchecked(it) };
-        UInt64Array::from_data(DataType::UInt64, buffer.into(), array.validity().clone());
+        UInt64Array::from_data(DataType::UInt64, buffer.into(), array.validity().cloned());
     });
 }
 
